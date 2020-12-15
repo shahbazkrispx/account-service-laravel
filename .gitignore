@@ -1,0 +1,5 @@
+.data
+.DS_Store
+src/.env
+src/node_modules
+src/vendor

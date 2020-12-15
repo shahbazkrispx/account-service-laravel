@@ -1,0 +1,15 @@
+FROM anterisdev/php-workspace:sha-2f305bd
+
+    WORKDIR /var/www/app
+
+    COPY ./src .
+
+    COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+
+    # Override Entrypoint
+    COPY ./docker/docker-entrypoint-workspace.sh /usr/local/bin/docker-entrypoint.sh
+    COPY ./docker/env-example /tmp/env-example
+    ENTRYPOINT ["docker-entrypoint.sh"]
+
+    # Keep the container running by opening an instance of PHP
+    CMD [ "docker-php-entrypoint", "php", "-a" ]
